@@ -11,7 +11,7 @@ File Name: sarnaik_bot.py
 File Purpose: Actual code used in order for Twitter Bot to Run!
 
 Github Repository: https://github.com/kss7yy/Sarnaik_Kunaal_DS3002_DataProject2
-Docker Container:
+Docker Container: https://hub.docker.com/r/kss7yy/sarnaik_airvisual_api_twitter_bot
 Twitter Profile: https://twitter.com/AirVisualBot
 AirVisual API: https://www.iqair.com/us/air-pollution-data-api
 '''
