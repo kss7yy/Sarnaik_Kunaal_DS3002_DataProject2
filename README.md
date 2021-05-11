@@ -24,6 +24,10 @@ Please enjoy this project!
 
 This section outlines a list of supported commands for the Twitter Bot. The usability that is shown in the succeeding sub-sections is what a Twitter user would Tweet in order for the Bot to respond with according information!
 
+Outline of supported functions by the Twitter Bot:
+
+1. [Function 1: List of Supported Countries](#function-1:-list-of-supported-countries)
+
 ### Function 1: List of Supported Countries
 
 This function allows the user to query the bot for a list of supported countries that the API has air quality and weather information for. The usability of this function is as follows:
@@ -36,5 +40,7 @@ From there, the Bot retrieves the supported countries in the AirVisual API using
 
 ![d](./images/img_fun1.PNG)
 
-In this case, the response of the request contained too many characters to be tweeted, so the user received a direct message of the supported countries from the Bot.
+In this case, the response of the request contained too many characters to be tweeted, so the user received a direct message of the supported countries from the Bot:
+
+![d](./images/img_fun1response.PNG)
 
