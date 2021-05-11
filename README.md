@@ -27,9 +27,12 @@ This section outlines a list of supported commands for the Twitter Bot. The usab
 Outline of supported functions by the Twitter Bot:
 
 - [Function 1: List of Supported Countries](#function-1-list-of-supported-countries)
-- [Function 2: List of Supported States in a Country](#function-1-list-of-supported-states-in-a-country)
+- [Function 2: List of Supported States in a Country](#function-2-list-of-supported-states-in-a-country)
 - [Function 3: List of Supported Cities in a State and Country](#function-3-list-of-supported-cities-in-a-state-and-country)
-
+- [Function 4: Weather Summary with GPS Coordinates](#)
+- [Function 5: Pollution Summary with GPS Coordinates](#)
+- [Function 6: Weather Summary with Specified Location](#)
+- [Function 7: Pollution Summary with Specified Location](#)
 ### Function 1: List of Supported Countries
 
 This function allows the user to query the bot for a list of supported countries that the API has air quality and weather information for. The usability of this function is as follows:
@@ -78,3 +81,34 @@ Again, the list of countries in California surpassed the Twitter tweet character
 
 ![d](./images/img_fun3response.PNG)
 
+### Function 4: Weather Summary with GPS Coordinates
+
+ This function allows the user to query a current weather summary (temperature, air pressure, humidity, and wind information) pertaining to a city that is supported and nearest the latitude and longitude GPS coordinates specified. The usability of this function is as follows:
+
+ ```
+ @AirVisualBot weather summary of lat <<enter-lat-here>> and long <<enter-long-here>>
+ ``` 
+
+Please note that the latitude must be specified between -90 and 90 (inclusively), and the longitude must be specified between -180 and 180 (inclusively). From there, the Bot retrieves the weather information in the city nearest to those coordinates from the AirVisual API using an according GET request to the following endpoint: http://api.airvisual.com/v2/nearest_city?lat={{LATITUDE}}&lon={{LONGITUDE}}&key={{YOUR_API_KEY}}. Here is an example of this request in action for the longitude and latitude nearest to Lost Creek, Texas in the United States of America:
+
+![d](./images/img_fun4.PNG)
+
+### Function 5: Pollution Summary with GPS Coordinates
+
+ This function allows the user to query a current pollution summary pertaining to a city that is supported and nearest the latitude and longitude GPS coordinates specified. The maximally concentrated pollutant (e.g., pm2.5, pm10, ozone, nitrogen dioxide, sulfur dioxide, and carbon monoxide) is retrieved as determined by the USA Air Quality Rating. Then, a personalized message based on the rating of that pollutant is also retrieved. The usability of this function is as follows:
+
+ ```
+ @AirVisualBot pollution summary of lat <<enter-lat-here>> and long <<enter-long-here>>
+ ``` 
+
+Please note that the latitude must be specified between -90 and 90 (inclusively), and the longitude must be specified between -180 and 180 (inclusively). From there, the Bot retrieves the pollution information in the city nearest to those coordinates from the AirVisual API using an according GET request to the following endpoint: http://api.airvisual.com/v2/nearest_city?lat={{LATITUDE}}&lon={{LONGITUDE}}&key={{YOUR_API_KEY}}. Here is an example of this request in action for the longitude and latitude nearest to Lost Creek, Texas in the United States of America:
+
+![d](./images/img_fun5.PNG)
+
+Similar to the first three functions, the user received a direct message since the character limit for twitter was exceeded in the response:
+
+![d](./images/img_fun5response.PNG)
+
+### Function 6: Weather Summary with Specified Location
+
+### Function 7: Pollution Summary with Specified Location
