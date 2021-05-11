@@ -26,7 +26,7 @@ This section outlines a list of supported commands for the Twitter Bot. The usab
 
 Outline of supported functions by the Twitter Bot:
 
-- [Function 1: List of Supported Countries](# function-1:-list-of-supported-countries)
+- [Function 1: List of Supported Countries](#function-1-list-of-supported-countries)
 
 ### Function 1: List of Supported Countries
 
