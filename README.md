@@ -27,6 +27,8 @@ This section outlines a list of supported commands for the Twitter Bot. The usab
 Outline of supported functions by the Twitter Bot:
 
 - [Function 1: List of Supported Countries](#function-1-list-of-supported-countries)
+- [Function 2: List of Supported States in a Country](#function-1-list-of-supported-states-in-a-country)
+- [Function 3: List of Supported Cities in a State and Country](#function-3-list-of-supported-cities-in-a-state-and-country)
 
 ### Function 1: List of Supported Countries
 
@@ -43,4 +45,36 @@ From there, the Bot retrieves the supported countries in the AirVisual API using
 In this case, the response of the request contained too many characters to be tweeted, so the user received a direct message of the supported countries from the Bot:
 
 ![d](./images/img_fun1response.PNG)
+
+### Function 2: List of Supported States in a Country
+
+This function allows the user to query the bot for a list of supported states in a country that the API has air quality and weather information for. The usability of this function is as follows:
+
+```
+@AirVisualBot list supported states in {{enter-country-name}}
+```
+
+From there, the Bot retrieves the supported states in the specified country from the AirVisual API using an according GET request to the following endpoint: http://api.airvisual.com/v2/states?country={{COUNTRY_NAME}}&key={{YOUR_API_KEY}}. Here is an example of this request in action for the states of USA:
+
+![d](./images/img_fun2.PNG)
+
+Similarly, the list of states surpassed the Twitter tweet character limit. Here is the direct message that the user received from the Bot:
+
+![d](./images/img_fun2response.PNG)
+
+### Function 3: List of Supported Cities in a State and Country
+
+This function allows the user to query the bot for a list of supported cities in a supported state and country that the API has air quality and weather information for. The usability of this function is as follows:
+
+```
+@AirVisualBot list supported cities in {{enter-state-name}}, {{enter-country-name}}
+```
+
+From there, the Bot retrieves the supported cities in the specified state and country from the AirVisual API using an according GET request to the following endpoint: http://api.airvisual.com/v2/cities?state={{STATE_NAME}}&country={{COUNTRY_NAME}}&key={{YOUR_API_KEY}}. Here is an example of this request in action for the cities of California, USA:
+
+![d](./images/img_fun3.PNG)
+
+Again, the list of countries in California surpassed the Twitter tweet character limit. Here is the direct message that the user received from the Bot:
+
+![d](./images/img_fun3response.PNG)
 
