@@ -26,13 +26,26 @@ This section outlines a list of supported commands for the Twitter Bot. The usab
 
 Outline of supported functions by the Twitter Bot:
 
+- [Function 0: HELP!!!](#function)
 - [Function 1: List of Supported Countries](#function-1-list-of-supported-countries)
 - [Function 2: List of Supported States in a Country](#function-2-list-of-supported-states-in-a-country)
 - [Function 3: List of Supported Cities in a State and Country](#function-3-list-of-supported-cities-in-a-state-and-country)
-- [Function 4: Weather Summary with GPS Coordinates](#)
-- [Function 5: Pollution Summary with GPS Coordinates](#)
-- [Function 6: Weather Summary with Specified Location](#)
-- [Function 7: Pollution Summary with Specified Location](#)
+- [Function 4: Weather Summary with GPS Coordinates](#function-4-weather-summary-with-gps-coordinates)
+- [Function 5: Pollution Summary with GPS Coordinates](#function-5-pollution-summary-with-gps-coordinates)
+- [Function 6: Weather Summary with Specified Location](#function-6-weather-summary-with-specified-location)
+- [Function 7: Pollution Summary with Specified Location](#function-7-pollution-summary-with-specified-location)
+- [Function 8: Temperature with GPS Coordinates](#)
+- [Function 9: Temperature with Specified Location](#)
+- [Function 10: Air Pressure with GPS Coordinates](#)
+- [Function 11: Air Pressure with Specified Location](#)
+- [Function 12: Humidity with GPS Coordinates](#)
+- [Function 13: Humidity with Specified Location](#)
+- [Function 14: Wind Information with GPS Coordinates](#)
+- [Function 15: WInd Information with Specified Location](#)
+
+### Function 0: Help
+
+
 ### Function 1: List of Supported Countries
 
 This function allows the user to query the bot for a list of supported countries that the API has air quality and weather information for. The usability of this function is as follows:
@@ -111,4 +124,56 @@ Similar to the first three functions, the user received a direct message since t
 
 ### Function 6: Weather Summary with Specified Location
 
+This function allows the user to query a current weather summary (temperature, air pressure, humidity, and wind information) pertaining to a specified city, state, and country. Note that the supported cities, states, and countries can be found using the first three functions above. The usability of this function is as follows:
+
+ ```
+ @AirVisualBot weather summary of <<enter-city-here>>, <<enter-state-here>> in country <<enter-country-here>>
+ ``` 
+
+From there, the Bot retrieves the weather information in that specified city from the AirVisual API using an according GET request to the following endpoint: http://api.airvisual.com/v2/city?city={{CITY}}&state={{STATE}}&{{COUNTRY}}=USA&key={{YOUR_API_KEY}}. Here is an example of this request in action for San Francisco, California in country USA:
+
+![d](./images/img_fun6.PNG)
+
 ### Function 7: Pollution Summary with Specified Location
+
+This function allows the user to query a current pollution summary pertaining to a specified city, state, and country. Note that the supported cities, states, and countries can be found using the first three functions above. The usability of this function is as follows:
+
+ ```
+ @AirVisualBot pollution summary of <<enter-city-here>>, <<enter-state-here>> in country <<enter-country-here>>
+ ``` 
+
+From there, the Bot retrieves the pollution information in that specified city from the AirVisual API using an according GET request to the following endpoint: http://api.airvisual.com/v2/city?city={{CITY}}&state={{STATE}}&{{COUNTRY}}=USA&key={{YOUR_API_KEY}}. Here is an example of this request in action for San Francisco, California in country USA:
+
+![d](./images/img_fun7.PNG)
+
+Here is the direct message the user received:
+
+![d](./images/img_fun7response.PNG)
+
+### Function 8: Temperature with GPS Coordinates
+
+### Function 9: Temperature with Specified Location
+
+### Function 10: Air Pressure with GPS Coordinates
+
+### Function 11: Air Pressure with Specified Location
+
+### Function 12: Humidity with GPS Coordinates
+
+### Function 13: Humidity with Specified Location
+
+### Function 14: Wind Information with GPS Coordinates
+
+### Function 15: WInd Information with Specified Location
+
+## Error Handling in Twitter
+
+### Case 1: Bad HTTP Request
+
+### Case 2: Unsupported Command
+
+## Cloning Usability
+
+## Overview of Files
+
+## End Notes
