@@ -257,7 +257,7 @@ Please note that the latitude must be specified between -90 and 90 (inclusively)
 
 ![d](./images/img_fun14.PNG)
 
-### Function 15: WInd Information with Specified Location
+### Function 15: Wind Information with Specified Location
 
 This function allows the user to query the current wind information (speed in m/s and direction in degrees) pertaining to a specified city, state, and country. Note that the supported cities, states, and countries can be found using the first three functions above. The usability of this function is as follows:
 
