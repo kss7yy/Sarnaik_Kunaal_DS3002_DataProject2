@@ -34,7 +34,7 @@ This function allows the user to query the bot for a list of supported countries
 
 From there, the Bot retrieves the supported countries in the AirVisual API using an according GET request to the following endpoint: http://api.airvisual.com/v2/countries?key={{YOUR_API_KEY}}
 
-![Here is an example of this request in action](images\img_fun1.PNG)
+![Here is an example of this request in action](./images/img_fun1.PNG)
 
 In this case, the response of the request contained too many characters to be tweeted, so the user received a direct message of the supported countries from the Bot.
 
