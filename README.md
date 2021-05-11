@@ -11,7 +11,7 @@ Welcome to my DS3002: Data Science Systems Data Project #2 repository!
 
 This repository contains the necessary files to write a Dockerized Python3 application that can be run to successfully execute the Twitter API, reading and writing information from the remote, publicly-accessible AirVisual API (https://www.iqair.com/us/air-pollution-data-api). Essentially, the applications creates a Twitter Bot that automatically replies to mentions querying global air quality or weather information via tweets or direct messages (depending on the number of characters present in the response). I created this containerized application to run on an Amazon AWS EC2 Instance, such that responding to mentions is automatic and continuous.
 
-The Twitter Bot (@AirVisualBot; https://twitter.com/AirVisualBot) responds to mentions from Twitter users querying information about the air quality (i.e., pollution) or weather (e.g., temperature, air pressure, humidity, or wind information) in a certain city. The city can be queried using supported cities, states, and countries, or it can be queried using GPS coordinates (latitude and longitude). Using the query as provided by the Bot's mentions on its Twitter feed, the code then retrieves according data from the AirVisual API in order to respond via direct message or tweet reply. It does this using a conditional if-elif-else statement in Python, leveraging the Tweepy Python library that runs in harmony with the Twitter Developer API. Finally, if the user requests help via an according query, enters in a unsupported command, or has their query result in a bad HTTP request to the API, the Bot responds with an informative help message and links to this ReadMe file to aid the user in reconstructing the query.
+The Twitter Bot (@AirVisualBot; https://twitter.com/AirVisualBot) responds to mentions from Twitter users querying information about the air quality (i.e., pollution) or weather (e.g., temperature, air pressure, humidity, or wind information) in a certain city. The city can be queried using supported cities, states, and countries, or it can be queried using GPS coordinates (latitude and longitude). Using the query as provided by the Bot's mentions on its Twitter feed, the code then retrieves according data from the AirVisual API in order to respond via direct message or tweet reply. It does this using a conditional if-elif-else statement in Python, leveraging the Tweepy Python library that runs in harmony with the Twitter Developer API. Finally, if the user requests help via an according query, enters in a unsupported command, or has their query result in a bad HTTP request to the API, the Bot responds with an informative help message and links to this README.md file to aid the user in reconstructing the query.
 
 Please enjoy this project!
 
@@ -59,6 +59,15 @@ Outline of supported functions by the Twitter Bot:
 
 ### Function 0: Help
 
+This is a "help" or "support" function that provides the user with helpful information regarding the usability of the application. The usability of this function is as follows (very simple!):
+
+```
+@AirVisualBot help
+```
+
+From there, the bot simply returns an informative message with a link to this README.md file and GitHub repo for further information:
+
+![d](./images/img_fun0.PNG)
 
 ### Function 1: List of Supported Countries
 
@@ -229,7 +238,7 @@ Please note that the latitude must be specified between -90 and 90 (inclusively)
 This function allows the user to query the current humidity (%) pertaining to a specified city, state, and country. Note that the supported cities, states, and countries can be found using the first three functions above. The usability of this function is as follows:
 
  ```
- @AirVisualBot pressure of <<enter-city-here>>, <<enter-state-here>> in country <<enter-country-here>>
+ @AirVisualBot humidity of <<enter-city-here>>, <<enter-state-here>> in country <<enter-country-here>>
  ``` 
 
 From there, the Bot retrieves the current humidity in that specified city from the AirVisual API using an according GET request to the following endpoint: http://api.airvisual.com/v2/city?city={{CITY}}&state={{STATE}}&{{COUNTRY}}=USA&key={{YOUR_API_KEY}}. The Bot also generates a personalized message regarding the magnitude of the current humidity. Here is an example of this request in action for San Francisco, California in country USA:
@@ -253,7 +262,7 @@ Please note that the latitude must be specified between -90 and 90 (inclusively)
 This function allows the user to query the current wind information (speed in m/s and direction in degrees) pertaining to a specified city, state, and country. Note that the supported cities, states, and countries can be found using the first three functions above. The usability of this function is as follows:
 
  ```
- @AirVisualBot pressure of <<enter-city-here>>, <<enter-state-here>> in country <<enter-country-here>>
+ @AirVisualBot wind information of <<enter-city-here>>, <<enter-state-here>> in country <<enter-country-here>>
  ``` 
 
 From there, the Bot retrieves the current wind information in that specified city from the AirVisual API using an according GET request to the following endpoint: http://api.airvisual.com/v2/city?city={{CITY}}&state={{STATE}}&{{COUNTRY}}=USA&key={{YOUR_API_KEY}}. The Bot also generates a personalized message regarding the magnitude of the current wind speed, and also generates a cardinal direction based on the degree direction provided by the API. Here is an example of this request in action for San Francisco, California in country USA:
@@ -269,10 +278,101 @@ The Twitter Bot also supports error handling of two common cases:
 
 ### Case 1: Bad HTTP Request
 
+The first common error case that the Twitter bot handles is a query resulting in a bad HTTP Request to the AirVisual API. Here is an example of this error handling in action:
+
+![d](./images/error_handling_badrequest.PNG)
+
+As seen in the above screenshot, the command is supported and follows the usability rules of Function #15 above. However, by looking closely at the state, we can see that the user meant 'California' yet instead entered 'Virginia'. As such, 'San Francisco, Virginia, in country USA' is not a supported city (and probably does not even exist). Thus, the Twitter Bot replies with an according tweet informing the user that this may be the reason their request was not handled correctly. The response also directs the user to try the help function in order to learn more information regarding usability of this application on Twitter.
+
 ### Case 2: Unsupported Command
+
+The other common error case that the Twitter bot handles is a query that is unsupported by the usability of this application. Here is an example of this error handling in action:
+
+![d](./images/error_handling_unsupportedcommand.PNG)
+
+As seen in the above screenshot, the command is unsupported by the application; it doesn't follow the usability rules of Functions 0-15. The Twitter bot recognizes this and responds with an informative error message reminding the user to check the usability rules and supported commands of the application.
 
 ## Cloning Usability
 
+The following section contains information on how to reproduce this application after cloning the repository from this GitHub endpoint.
+
+### Pulling/Creating the Dockerfile
+
+#### Pulling Directly from Dockerhub
+
+One can pull this container directly from Docker Hub using the following command: 
+
+```
+docker pull kss7yy/sarnaik_airvisual_api_twitter_bot
+```
+
+However, this type of pulling is essentially useless since environment variables are required not only to authenticate to the Twitter account, but also the AirVisual API. These have been passed in to the AWS EC2 Instance and Docker container at runtime, so others do not have access to my sensitive information!
+
+#### Manual Build and Creation
+
+If one decides to reproduce this application, manual build and creation is much more fruitful, as it will allow the passing in of environment variables at runtime! After cloning the GitHub repository locally, cd into the directory, and run the following command:
+
+```
+docker build -t <image tag> .
+```
+
+### Running the Docker Container
+
+In order to run the Docker Container successfully, one must be able to pass in environment variables at runtime. The proper command to run with these variables is as follows:
+
+```
+docker run -it -e CONSUMER_KEY="<<enter-twitter-consumer-key>>" \
+ -e CONSUMER_SECRET="<<enter-twitter-consumer-secret-key>>" \
+ -e ACCESS_TOKEN="<<enter-twitter-access-token>>" \
+ -e ACCESS_TOKEN_SECRET="<<enter-twitter-secret-access-token>>" \
+ -e AIRVISUAL_KEY="<<enter-airvisual-api-key>>" \
+ kss7yy/sarnaik_airvisual_api_twitter_bot
+```
+
+With this run command, you can run the docker container with your own Twitter developer account and AirVisual API Key. The following links are extremely helpful to follow along with in order to generate the relevant API keys, understand the code/docker container, and also upload the container to AWS as I have done:
+
+- AirVisual API Key Generation: https://www.iqair.com/us/air-pollution-data-api
+- Twitter Developer Account Generation: https://developer.twitter.com/
+- Real Python Twitter API Tutorial (with Dockerization and AWS Upload): https://realpython.com/twitter-bot-python-tweepy/
+
 ## Overview of Files and General Documentation
 
+This section contains a general overview of the files included in this repository. Please refer to the files themselves for specific, inline comments to aid in understanding the application and code that runs it.
+
+### bots directory
+
+#### config.py
+
+Contains the initial verification of Twitter credentials for the account that is being used to read/write tweets and direct messages.
+
+#### sarnaik_bot.py
+
+Contains the bulk of the code utilized to execute the application successfully. This is the script that is being continually run in the Docker Container in AWS.
+
+#### api_tester.py
+
+Utilized to test the API and functionality of the application locally (without twitter). Prompts the user for a query through use of the console and responds with the console as well (strictly input/output functionality).
+
+### Dockerfile
+
+Contains the instructions necessary to build the Docker container of this application. Utilizes the python:3.7-alpine base container and then moves relevant files into the docker container for build. Executes the sarnaik_bot.py script at runtime as default after installing the relevant Python modules and libraries in 'requirements.txt' using the pip3 Python installer.
+
+### requirements.txt
+
+Contains the Python modules and libraries necessary for the successful execution of this application. These are as follows: certifi, chardet, idna, oauthlib, Pysocks, requests, requests-oauthlib, six, tweepy, and urllib3.
+
+### sarnaik_airvisual_api_twitter_bot.tar.gz
+
+Encoded image of the Docker container utilized for uploading to AWS EC2 instance.
+
+### venv directory
+
+Python's default virtual environment created for initial testing of this application on local machine.
+
+### images directory
+
+Possesses the images utilized throughout this README.md file.
+
 ## End Notes
+
+This project was programmed through use of Python3, Docker, AWS, Twitter, Twitter Developer API, and Github by Kunaal Sarnaik (kss7yy@virginia.edu). The assignment is Data Project #2 in the DS 3002: Data Science Systems Course at the University of Virginia, taught by professor Neal Magee, Ph.D. during the Spring 2021 semester. DS 3002 was taken for completion of the Data Science Minor at the University of Virginia.
