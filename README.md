@@ -20,13 +20,27 @@ Please enjoy this project!
 - Twitter Account: https://twitter.com/AirVisualBot
 - AirVisual API: https://www.iqair.com/us/air-pollution-data-api
 
+## Table of Contents
+
+- [Twitter Usability](#twitter-usability)
+- [Error Handling in Twitter](#error-handling-in-twitter)
+- [Cloning Usability](#cloning-usability)
+- [Overview of Files and General Documentation](#overview-of-files-and-general-documentation)
+- [End Notes](#end-notes)
+
 ## Twitter Usability
+
+**DISCLAIMER #1**: When using this application, ensure that your Twitter profile is able to receive direct messages from anyone. Otherwise, some of the functionality will not be able to work, and the script will have to be manually restarted in AWS. You can do this by going to "Settings and Privacy", clicking "Privacy and Safety", and toggling the switch next to "allow anyone to send you Direct Messages."
 
 This section outlines a list of supported commands for the Twitter Bot. The usability that is shown in the succeeding sub-sections is what a Twitter user would Tweet in order for the Bot to respond with according information!
 
+**DISCLAIMER #2**: When using latitude and longitude GPS coordinates, please ensure that the latitude is limited to between -90 and 90 (inclusive), and longitude is limited to between -180 and 180. 
+
+**DISCLAIMER #3**: Only use supported cities, states, and countries, as specified by Functions 1-3 below. For example, the bot does not recognize "United States of America" due to character constrains in Twitter, but it does recognize "USA" as a country (as seen below).
+
 Outline of supported functions by the Twitter Bot:
 
-- [Function 0: HELP!!!](#function)
+- [Function 0: HELP!!!](#function-0-help)
 - [Function 1: List of Supported Countries](#function-1-list-of-supported-countries)
 - [Function 2: List of Supported States in a Country](#function-2-list-of-supported-states-in-a-country)
 - [Function 3: List of Supported Cities in a State and Country](#function-3-list-of-supported-cities-in-a-state-and-country)
@@ -34,14 +48,14 @@ Outline of supported functions by the Twitter Bot:
 - [Function 5: Pollution Summary with GPS Coordinates](#function-5-pollution-summary-with-gps-coordinates)
 - [Function 6: Weather Summary with Specified Location](#function-6-weather-summary-with-specified-location)
 - [Function 7: Pollution Summary with Specified Location](#function-7-pollution-summary-with-specified-location)
-- [Function 8: Temperature with GPS Coordinates](#)
-- [Function 9: Temperature with Specified Location](#)
-- [Function 10: Air Pressure with GPS Coordinates](#)
-- [Function 11: Air Pressure with Specified Location](#)
-- [Function 12: Humidity with GPS Coordinates](#)
-- [Function 13: Humidity with Specified Location](#)
-- [Function 14: Wind Information with GPS Coordinates](#)
-- [Function 15: WInd Information with Specified Location](#)
+- [Function 8: Temperature with GPS Coordinates](#function-8-temperature-with-gps-coordinates)
+- [Function 9: Temperature with Specified Location](#function-9-temperature-with-specified-location)
+- [Function 10: Air Pressure with GPS Coordinates](#function-10-air-pressure-with-gps-coordinates)
+- [Function 11: Air Pressure with Specified Location](#function-11-air-pressure-with-specified-location)
+- [Function 12: Humidity with GPS Coordinates](#function-12-humidity-with-gps-coordinates)
+- [Function 13: Humidity with Specified Location](#function-13-humidity-with-specified-location)
+- [Function 14: Wind Information with GPS Coordinates](#function-14-wind-information-with-gps-coordinates)
+- [Function 15: WInd Information with Specified Location](#function-15-wind-information-with-specified-location)
 
 ### Function 0: Help
 
@@ -152,21 +166,106 @@ Here is the direct message the user received:
 
 ### Function 8: Temperature with GPS Coordinates
 
+ This function allows the user to query the current temperature (in degrees Celsius) pertaining to a city that is supported and nearest the latitude and longitude GPS coordinates specified. The usability of this function is as follows:
+
+ ```
+ @AirVisualBot temperature of lat <<enter-lat-here>> and long <<enter-long-here>>
+ ``` 
+
+Please note that the latitude must be specified between -90 and 90 (inclusively), and the longitude must be specified between -180 and 180 (inclusively). From there, the Bot retrieves the current temperature in the city nearest to those coordinates from the AirVisual API using an according GET request to the following endpoint: http://api.airvisual.com/v2/nearest_city?lat={{LATITUDE}}&lon={{LONGITUDE}}&key={{YOUR_API_KEY}}. The Bot also generates a personalized message regarding the magnitude of the current temperature. Here is an example of this request in action for the longitude and latitude nearest to Lost Creek, Texas in the United States of America:
+
+![d](./images/img_fun8.PNG)
+
 ### Function 9: Temperature with Specified Location
+
+This function allows the user to query the current temperature (in degrees Celsius) pertaining to a specified city, state, and country. Note that the supported cities, states, and countries can be found using the first three functions above. The usability of this function is as follows:
+
+ ```
+ @AirVisualBot temperature of <<enter-city-here>>, <<enter-state-here>> in country <<enter-country-here>>
+ ``` 
+
+From there, the Bot retrieves the current temperature in that specified city from the AirVisual API using an according GET request to the following endpoint: http://api.airvisual.com/v2/city?city={{CITY}}&state={{STATE}}&{{COUNTRY}}=USA&key={{YOUR_API_KEY}}. The Bot also generates a personalized message regarding the magnitude of the current temperature. Here is an example of this request in action for San Francisco, California in country USA:
+
+![d](./images/img_fun9.PNG)
 
 ### Function 10: Air Pressure with GPS Coordinates
 
+ This function allows the user to query the current air pressure (in hPa) pertaining to a city that is supported and nearest the latitude and longitude GPS coordinates specified. The usability of this function is as follows:
+
+ ```
+ @AirVisualBot pressure of lat <<enter-lat-here>> and long <<enter-long-here>>
+ ``` 
+
+Please note that the latitude must be specified between -90 and 90 (inclusively), and the longitude must be specified between -180 and 180 (inclusively). From there, the Bot retrieves the current air pressure in the city nearest to those coordinates from the AirVisual API using an according GET request to the following endpoint: http://api.airvisual.com/v2/nearest_city?lat={{LATITUDE}}&lon={{LONGITUDE}}&key={{YOUR_API_KEY}}. The Bot also generates a personalized message regarding the magnitude of the current air pressure. Here is an example of this request in action for the longitude and latitude nearest to Lost Creek, Texas in the United States of America:
+
+![d](./images/img_fun10.PNG)
+
 ### Function 11: Air Pressure with Specified Location
+
+This function allows the user to query the current air pressure (in hPa) pertaining to a specified city, state, and country. Note that the supported cities, states, and countries can be found using the first three functions above. The usability of this function is as follows:
+
+ ```
+ @AirVisualBot pressure of <<enter-city-here>>, <<enter-state-here>> in country <<enter-country-here>>
+ ``` 
+
+From there, the Bot retrieves the current air pressure in that specified city from the AirVisual API using an according GET request to the following endpoint: http://api.airvisual.com/v2/city?city={{CITY}}&state={{STATE}}&{{COUNTRY}}=USA&key={{YOUR_API_KEY}}. The Bot also generates a personalized message regarding the magnitude of the current air pressure. Here is an example of this request in action for San Francisco, California in country USA:
+
+![d](./images/img_fun11.PNG)
 
 ### Function 12: Humidity with GPS Coordinates
 
+ This function allows the user to query the current humidity (%) pertaining to a city that is supported and nearest the latitude and longitude GPS coordinates specified. The usability of this function is as follows:
+
+ ```
+ @AirVisualBot humidity of lat <<enter-lat-here>> and long <<enter-long-here>>
+ ``` 
+
+Please note that the latitude must be specified between -90 and 90 (inclusively), and the longitude must be specified between -180 and 180 (inclusively). From there, the Bot retrieves the current humidity in the city nearest to those coordinates from the AirVisual API using an according GET request to the following endpoint: http://api.airvisual.com/v2/nearest_city?lat={{LATITUDE}}&lon={{LONGITUDE}}&key={{YOUR_API_KEY}}. The Bot also generates a personalized message regarding the magnitude of the current humidity. Here is an example of this request in action for the longitude and latitude nearest to Lost Creek, Texas in the United States of America:
+
+![d](./images/img_fun12.PNG)
+
 ### Function 13: Humidity with Specified Location
+
+This function allows the user to query the current humidity (%) pertaining to a specified city, state, and country. Note that the supported cities, states, and countries can be found using the first three functions above. The usability of this function is as follows:
+
+ ```
+ @AirVisualBot pressure of <<enter-city-here>>, <<enter-state-here>> in country <<enter-country-here>>
+ ``` 
+
+From there, the Bot retrieves the current humidity in that specified city from the AirVisual API using an according GET request to the following endpoint: http://api.airvisual.com/v2/city?city={{CITY}}&state={{STATE}}&{{COUNTRY}}=USA&key={{YOUR_API_KEY}}. The Bot also generates a personalized message regarding the magnitude of the current humidity. Here is an example of this request in action for San Francisco, California in country USA:
+
+![d](./images/img_fun13.PNG)
 
 ### Function 14: Wind Information with GPS Coordinates
 
+ This function allows the user to query the current wind information (speed in m/s and direction in degrees) pertaining to a city that is supported and nearest the latitude and longitude GPS coordinates specified. The usability of this function is as follows:
+
+ ```
+ @AirVisualBot wind information of lat <<enter-lat-here>> and long <<enter-long-here>>
+ ``` 
+
+Please note that the latitude must be specified between -90 and 90 (inclusively), and the longitude must be specified between -180 and 180 (inclusively). From there, the Bot retrieves the current wind information in the city nearest to those coordinates from the AirVisual API using an according GET request to the following endpoint: http://api.airvisual.com/v2/nearest_city?lat={{LATITUDE}}&lon={{LONGITUDE}}&key={{YOUR_API_KEY}}. The Bot also generates a personalized message regarding the magnitude of the current wind speed, and also generates a cardinal direction based on the degree direction provided by the API. Here is an example of this request in action for the longitude and latitude nearest to Lost Creek, Texas in the United States of America:
+
+![d](./images/img_fun14.PNG)
+
 ### Function 15: WInd Information with Specified Location
 
+This function allows the user to query the current wind information (speed in m/s and direction in degrees) pertaining to a specified city, state, and country. Note that the supported cities, states, and countries can be found using the first three functions above. The usability of this function is as follows:
+
+ ```
+ @AirVisualBot pressure of <<enter-city-here>>, <<enter-state-here>> in country <<enter-country-here>>
+ ``` 
+
+From there, the Bot retrieves the current wind information in that specified city from the AirVisual API using an according GET request to the following endpoint: http://api.airvisual.com/v2/city?city={{CITY}}&state={{STATE}}&{{COUNTRY}}=USA&key={{YOUR_API_KEY}}. The Bot also generates a personalized message regarding the magnitude of the current wind speed, and also generates a cardinal direction based on the degree direction provided by the API. Here is an example of this request in action for San Francisco, California in country USA:
+
+![d](./images/img_fun15.PNG)
+
 ## Error Handling in Twitter
+
+The Twitter Bot also supports error handling of two common cases:
+
+- [Case 1: Bad HTTP Request](#case-1-bad-http-request)
+- [Case 2: Unsupported Command](#case-2-unsupported-command)
 
 ### Case 1: Bad HTTP Request
 
@@ -174,6 +273,6 @@ Here is the direct message the user received:
 
 ## Cloning Usability
 
-## Overview of Files
+## Overview of Files and General Documentation
 
 ## End Notes
