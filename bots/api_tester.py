@@ -1,5 +1,15 @@
 #!/usr/bin/env python3
+'''
+Name: Kunaal Sarnaik (kss7yy@virginia.edu)
+Course: DS 3002 - Data Science Systems (Spring 2021)
+Date: May 10th, 2021
+Professor: Neal Magee, Ph.D.
+Project Name: Air Visual API Twitter Bot
+Assignment: DS3002 Data Project #2
 
+File Name: api_tester.py
+File Purpose: Used for local testing with console.
+'''
 import requests
 import json
 import os
