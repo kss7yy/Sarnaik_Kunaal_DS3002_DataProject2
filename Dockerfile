@@ -21,4 +21,4 @@ WORKDIR /bots
 CMD ["python3", "sarnaik_bot.py"]
 
 # Reminder for reader, proper usability of the application is as follows if running locally:
-#   "docker run -it -e CONSUMER_KEY="uDRNy31oWfoiKV9AvPoNavy0I" -e CONSUMER_SECRET="lnAL5VAgZLWNspQVpd3X6tEo47PRCmsPEwuxpvLCLSR08DMa4O" -e ACCESS_TOKEN="622518593-j7gWSqzQO31ju7Bf7idB47NlZeSENsuADGU9B69I" -e ACCESS_TOKEN_SECRET="iutFsxvP5IglRckJ1I1why6017xMNkzxqBID48Azw0GvT" kss7yy/sarnaik_airvisual_API_twitter_bot"
+#   "docker run -it -e CONSUMER_KEY="<<insert-consumer-key>>" -e CONSUMER_SECRET="<<insert-secret-consumer-key>>" -e ACCESS_TOKEN="<<insert-access-token>>" -e ACCESS_TOKEN_SECRET="<<insert-secret-access-token>>" -e AIRVISUAL_KEY="<<insert-airvisualAPI-access-key>> kss7yy/sarnaik_airvisual_API_twitter_bot"
